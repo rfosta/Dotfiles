@@ -6,6 +6,7 @@
     ./neovim.nix
     ./helix.nix
     ./eza.nix
+		./ripgrep.nix
 
     # Desktop
     ./firefox.nix

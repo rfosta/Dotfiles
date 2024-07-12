@@ -5,7 +5,6 @@
 
     # CLI tools
     nitch
-    ripgrep
     fzf
 
     # Work
