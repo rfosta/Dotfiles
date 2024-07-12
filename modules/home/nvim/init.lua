@@ -13,7 +13,8 @@ vim.opt.mouse = 'a'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.hlsearch = false
+-- Highlight results when searching
+vim.opt.hlsearch = true
 
 vim.opt.wrap = true -- Will display line on the next line if bigger than width of window
 vim.opt.breakindent = true -- Continue indentation for wrapped lines
@@ -27,6 +28,12 @@ vim.opt.expandtab = false
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Save undo history
+vim.opt.undofile = true
 
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
@@ -36,9 +43,9 @@ vim.g.netrw_winsize = 30
 vim.g.mapleader = ' '
 
 -- Shortcuts
-vim.keymap.set({'n', 'x', 'o'}, '<leader>h', '^') -- Takes me to the first non-blank char on the line
-vim.keymap.set({'n', 'x', 'o'}, '<leader>l', 'g_') -- Takes me to the last non-blank char on the line
-vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>') -- Selects the whole contents of the file in [visual mode]. gg -> V -> G 
+vim.keymap.set({'n', 'x', 'o'}, '<leader>h', '^', { desc = "Go to first non-blank char on line" }) -- Takes me to the first non-blank char on the line
+vim.keymap.set({'n', 'x', 'o'}, '<leader>l', 'g_', { desc = "Go to last non-blank char on line" }) -- Takes me to the last non-blank char on the line
+vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = "Select the whole contents of the file" }) -- Selects the whole contents of the file in [visual mode]. gg -> V -> G 
 
 -- Basic clipboard interaction
 vim.keymap.set({'n', 'x'}, 'gy', '"+y') -- copy
@@ -49,12 +56,14 @@ vim.keymap.set({'n', 'x'}, 'x', '"_x')
 vim.keymap.set({'n', 'x'}, 'X', '"_d')
 
 -- Commands
-vim.keymap.set('n', '<leader>w', '<cmd>write<cr>') -- Write file 
+vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = "[W]rite file" }) -- Write file 
 vim.keymap.set('n', '<leader>bq', '<cmd>bdelete<cr>')
 vim.keymap.set('n', '<leader>bl', '<cmd>buffer #<cr>')
 vim.keymap.set('n', '<leader><space>', '<cmd>buffers<cr>:buffer<Space>')
 vim.keymap.set('n', '<leader>e', '<cmd>Lexplore %:p:h<cr>')
 vim.keymap.set('n', '<leader>E', '<cmd>Lexplore<cr>') -- Toggles netrw in split window to the left
+
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>') -- Remove highlight on search result when I hit esc
 
 local function netrw_mapping()
   local bufmap = function(lhs, rhs)
@@ -146,6 +155,8 @@ require("lazy").setup({
 	{ "numToStr/Comment.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "lewis6991/gitsigns.nvim" },
+	{ "nvim-telescope/telescope.nvim", branch = '0.1.x' },
+	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 })
 
 -- ========================================================================== --
@@ -206,3 +217,17 @@ require('gitsigns').setup({
     changedelete = {text = '▎'},
   }
 })
+
+---
+-- Telescope (Find, Filter, Preview, Pick. All lua, all the time.) 
+--
+require("telescope").setup({
+})
+
+-- Telescope Keymaps
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "[S]earch [H]elp" })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+
+-- Enable Telescope extensions if they are installed
+require('telescope').load_extension('fzf')
