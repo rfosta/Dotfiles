@@ -7,6 +7,7 @@
     ./helix.nix
     ./eza.nix
 		./ripgrep.nix
+		./fd.nix
 
     # Desktop
     ./firefox.nix
