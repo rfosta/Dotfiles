@@ -67,6 +67,7 @@ local function netrw_mapping()
   bufmap('<leader>E', ':Lexplore<cr>')
 
   -- Go back in history
+	--
   bufmap('H', 'u')
 
   -- Go up a directory
@@ -110,4 +111,98 @@ vim.api.nvim_create_autocmd('FileType', {
   group = group,
   desc = 'Keybindings for netrw',
   callback = netrw_mapping
+})
+
+
+-- ========================================================================== --
+-- ==                         PLUGIN CONFIGURATION                         == --
+-- ========================================================================== --
+
+
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "nvim-lualine/lualine.nvim" },
+	{ "kyazdani42/nvim-web-devicons" },
+	{ "akinsho/bufferline.nvim" },
+	{ "numToStr/Comment.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "lewis6991/gitsigns.nvim" },
+})
+
+-- ========================================================================== --
+-- ==                         PLUGIN CONFIGURATION                         == --
+-- ========================================================================== --
+
+---
+-- Colorscheme (Catppuccin)
+---
+vim.opt.termguicolors = true
+vim.cmd.colorscheme('catppuccin')
+
+---
+-- lualine.nvim (statusline)
+---
+vim.opt.showmode = false
+
+require('lualine').setup({
+  options = {
+    icons_enabled = true,
+    theme = 'catppuccin',
+    component_separators = '|',
+    section_separators = '',
+  },
+})
+
+---
+-- bufferline.nvim (A snazzy 💅 buffer line (with tabpage integration) for Neovim built using lua.)
+---
+require("bufferline").setup({
+	options = {
+		mode = "buffers",
+		offsets = {
+			{ filetype = "netrw" }
+		},
+	},
+})
+
+---
+-- Comment.nvim (🧠 💪 // Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more)
+---
+require("Comment").setup()
+
+---
+-- Indent Blankline (Indent guides for Neovim) 
+---
+require("ibl").setup()
+
+---
+-- Gitsigns ( Git integration for buffers )
+---
+require('gitsigns').setup({
+  signs = {
+    add = {text = '▎'},
+    change = {text = '▎'},
+    delete = {text = '➤'},
+    topdelete = {text = '➤'},
+    changedelete = {text = '▎'},
+  }
 })
