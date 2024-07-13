@@ -35,6 +35,9 @@ vim.opt.splitbelow = true
 -- Save undo history
 vim.opt.undofile = true
 
+-- Set default shell for terminal
+vim.opt.shell = 'fish'
+
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
 -- ========================================================================== --
@@ -157,6 +160,9 @@ require("lazy").setup({
 	{ "lewis6991/gitsigns.nvim" },
 	{ "nvim-telescope/telescope.nvim", branch = '0.1.x' },
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+	{'nvim-treesitter/nvim-treesitter'},
+	{'nvim-treesitter/nvim-treesitter-textobjects'},
+	{'akinsho/toggleterm.nvim'},
 })
 
 -- ========================================================================== --
@@ -228,6 +234,67 @@ require("telescope").setup({
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "[S]earch [F]iles" })
+vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = "[S]earch [T]elescope" })
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 
 -- Enable Telescope extensions if they are installed
 require('telescope').load_extension('fzf')
+
+---
+-- Treesitter
+---
+require('nvim-treesitter.configs').setup({
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
+	autopairs = {
+		enable = true,
+	},
+	folding = {
+		enable = true,
+	},
+	auto_install = true,
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true,
+			keymaps = {
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+			},
+		},
+	},
+	ensure_installed = {
+		'lua',
+		'javascript',
+		'vim',
+		'css',
+		'json',
+		'nix',
+		'typescript',
+		'vimdoc',
+		'tsx',
+		'html'
+	},
+	build = ":TSUpdate",
+})
+
+-- Prefer git instead of curl in order to improve connectivity in some environments
+require('nvim-treesitter.install').prefer_git = true
+
+require('toggleterm').setup({
+  open_mapping = '<C-g>',
+  direction = 'horizontal',
+  shade_terminals = true
+})
