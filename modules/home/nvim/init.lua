@@ -38,6 +38,10 @@ vim.opt.undofile = true
 -- Set default shell for terminal
 vim.opt.shell = 'fish'
 
+
+-- Allows themes to change the colors
+vim.opt.termguicolors = true
+
 -- ========================================================================== --
 -- ==                             KEYBINDINGS                              == --
 -- ========================================================================== --
@@ -127,7 +131,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 
 -- ========================================================================== --
--- ==                         PLUGIN CONFIGURATION                         == --
+-- ==                         INSTALLING LAZY			                         == --
 -- ========================================================================== --
 
 
@@ -150,151 +154,190 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{ "nvim-lualine/lualine.nvim" },
-	{ "kyazdani42/nvim-web-devicons" },
-	{ "akinsho/bufferline.nvim" },
-	{ "numToStr/Comment.nvim" },
-	{ "lukas-reineke/indent-blankline.nvim" },
-	{ "lewis6991/gitsigns.nvim" },
-	{ "nvim-telescope/telescope.nvim", branch = '0.1.x' },
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-	{'nvim-treesitter/nvim-treesitter'},
-	{'nvim-treesitter/nvim-treesitter-textobjects'},
-	{'akinsho/toggleterm.nvim'},
-})
+require("lazy").setup({ import = "plugins"})
 
 -- ========================================================================== --
 -- ==                         PLUGIN CONFIGURATION                         == --
 -- ========================================================================== --
 
----
--- Colorscheme (Catppuccin)
----
-vim.opt.termguicolors = true
-vim.cmd.colorscheme('catppuccin')
-
----
--- lualine.nvim (statusline)
----
-vim.opt.showmode = false
-
-require('lualine').setup({
-  options = {
-    icons_enabled = true,
-    theme = 'catppuccin',
-    component_separators = '|',
-    section_separators = '',
-  },
-})
-
----
--- bufferline.nvim (A snazzy 💅 buffer line (with tabpage integration) for Neovim built using lua.)
----
-require("bufferline").setup({
-	options = {
-		mode = "buffers",
-		offsets = {
-			{ filetype = "netrw" }
-		},
-	},
-})
-
----
--- Comment.nvim (🧠 💪 // Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more)
----
-require("Comment").setup()
-
----
--- Indent Blankline (Indent guides for Neovim) 
----
-require("ibl").setup()
-
----
--- Gitsigns ( Git integration for buffers )
----
-require('gitsigns').setup({
-  signs = {
-    add = {text = '▎'},
-    change = {text = '▎'},
-    delete = {text = '➤'},
-    topdelete = {text = '➤'},
-    changedelete = {text = '▎'},
-  }
-})
-
----
--- Telescope (Find, Filter, Preview, Pick. All lua, all the time.) 
+-- ---
+-- -- Bye
+-- ---
+-- vim.keymap.set('n', '<leader>bc', '<cmd>Bdelete<CR>', { desc = "[B]uffer [C]lose" })
 --
-require("telescope").setup({
-})
-
--- Telescope Keymaps
-local builtin = require 'telescope.builtin'
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "[S]earch [H]elp" })
-vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = "[S]earch [T]elescope" })
-vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-
--- Enable Telescope extensions if they are installed
-require('telescope').load_extension('fzf')
-
----
--- Treesitter
----
-require('nvim-treesitter.configs').setup({
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	autopairs = {
-		enable = true,
-	},
-	folding = {
-		enable = true,
-	},
-	auto_install = true,
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-			},
-		},
-	},
-	ensure_installed = {
-		'lua',
-		'javascript',
-		'vim',
-		'css',
-		'json',
-		'nix',
-		'typescript',
-		'vimdoc',
-		'tsx',
-		'html'
-	},
-	build = ":TSUpdate",
-})
-
--- Prefer git instead of curl in order to improve connectivity in some environments
-require('nvim-treesitter.install').prefer_git = true
-
-require('toggleterm').setup({
-  open_mapping = '<C-g>',
-  direction = 'horizontal',
-  shade_terminals = true
-})
+-- ---
+-- -- lualine.nvim (statusline)
+-- ---
+-- vim.opt.showmode = false
+--
+-- require('lualine').setup({
+--   options = {
+--     icons_enabled = true,
+--     theme = 'catppuccin',
+--     component_separators = '|',
+--     section_separators = '',
+-- 		disable_filetypes = {
+-- 			statusline =  { "NvimTree" }
+-- 		}
+--   },
+-- })
+--
+-- ---
+-- -- bufferline.nvim (A snazzy 💅 buffer line (with tabpage integration) for Neovim built using lua.)
+-- ---
+-- require("bufferline").setup({
+-- 	options = {
+-- 		mode = "buffers",
+-- 		offsets = {
+-- 			{ filetype = "NvimTree" }
+-- 		},
+-- 		highlights = {
+-- 			buffer_selected = {
+-- 				italic = false
+-- 			},
+-- 			indicator_selected = {
+-- 				fg = { attribute = 'fg', highlight = 'Function' },
+-- 				italic = false
+-- 			}
+-- 		}
+-- 	},
+-- })
+--
+-- ---
+-- -- Comment.nvim (🧠 💪 // Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more)
+-- ---
+-- require("Comment").setup()
+--
+-- ---
+-- -- Indent Blankline (Indent guides for Neovim) 
+-- ---
+-- require("ibl").setup({
+-- 	enabled = true,
+-- 	scope = {
+-- 		enabled = false,
+-- 	},
+-- 	indent = {
+-- 		char = '|',
+-- 	}
+-- })
+--
+-- ---
+-- -- Gitsigns ( Git integration for buffers )
+-- ---
+-- require('gitsigns').setup({
+--   signs = {
+--     add = {text = '▎'},
+--     change = {text = '▎'},
+--     delete = {text = '➤'},
+--     topdelete = {text = '➤'},
+--     changedelete = {text = '▎'},
+--   }
+-- })
+--
+-- ---
+-- -- Telescope (Find, Filter, Preview, Pick. All lua, all the time.) 
+-- --
+-- require("telescope").setup({
+-- })
+--
+-- -- Telescope Keymaps
+-- local builtin = require 'telescope.builtin'
+-- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "[S]earch [H]elp" })
+-- vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+-- vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "[S]earch [F]iles" })
+-- vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = "[S]earch [T]elescope" })
+-- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+-- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+-- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+-- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+--
+-- -- Enable Telescope extensions if they are installed
+-- require('telescope').load_extension('fzf')
+--
+-- ---
+-- -- Treesitter
+-- ---
+-- require('nvim-treesitter.configs').setup({
+-- 	highlight = {
+-- 		enable = true,
+-- 	},
+-- 	indent = {
+-- 		enable = true,
+-- 	},
+-- 	autopairs = {
+-- 		enable = true,
+-- 	},
+-- 	folding = {
+-- 		enable = true,
+-- 	},
+-- 	auto_install = true,
+-- 	textobjects = {
+-- 		select = {
+-- 			enable = true,
+-- 			lookahead = true,
+-- 			keymaps = {
+-- 				["aa"] = "@parameter.outer",
+-- 				["ia"] = "@parameter.inner",
+-- 				["af"] = "@function.outer",
+-- 				["if"] = "@function.inner",
+-- 				["ac"] = "@class.outer",
+-- 				["ic"] = "@class.inner",
+-- 			},
+-- 		},
+-- 	},
+-- 	ensure_installed = {
+-- 		'lua',
+-- 		'javascript',
+-- 		'vim',
+-- 		'css',
+-- 		'json',
+-- 		'nix',
+-- 		'typescript',
+-- 		'vimdoc',
+-- 		'tsx',
+-- 		'html'
+-- 	},
+-- 	build = ":TSUpdate",
+-- })
+--
+-- -- Prefer git instead of curl in order to improve connectivity in some environments
+-- require('nvim-treesitter.install').prefer_git = true
+--
+-- require('toggleterm').setup({
+--   open_mapping = '<C-g>',
+--   direction = 'horizontal',
+--   shade_terminals = true
+-- })
+--
+-- ---
+-- -- NVim-Tree
+-- ---
+--
+-- -- disable netrw at the very start of your init.lua
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+--
+-- -- See :help nvim-tree-setup
+-- require('nvim-tree').setup({
+-- 	view = { adaptive_size = true },
+--   hijack_cursor = false,
+--   on_attach = function(bufnr)
+--     local bufmap = function(lhs, rhs, desc)
+--       vim.keymap.set('n', lhs, rhs, {buffer = bufnr, desc = desc})
+--     end
+--
+--     -- :help nvim-tree.api
+--     local api = require('nvim-tree.api')
+--
+--     -- default mappings
+--     api.config.mappings.default_on_attach(bufnr)
+--
+--     bufmap('L', api.node.open.edit, 'Expand folder or go to file')
+--     bufmap('H', api.node.navigate.parent_close, 'Close parent folder')
+--     bufmap('gh', api.tree.toggle_hidden_filter, 'Toggle hidden files')
+-- 		bufmap('C', api.fs.create, 'Create file or folder')
+--   end
+-- })
+--
+-- vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+--
