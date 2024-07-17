@@ -1,5 +1,4 @@
-{ inputs, pkgs, ...}:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     vesktop
 
@@ -9,5 +8,5 @@
 
     # Work
     google-chrome
-  ]; 
+  ];
 }

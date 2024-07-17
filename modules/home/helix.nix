@@ -8,10 +8,6 @@
     package = inputs.helix.packages.${pkgs.system}.default;
 
     extraPackages = with pkgs; [
-      # Markdown
-      marksman
-      markdown-oxide
-
       # Nix
       nixd
       nil
