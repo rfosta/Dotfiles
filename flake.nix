@@ -2,7 +2,7 @@
   description = "My Simple Flake (Work in Progress)";
 
   inputs = {
-    # Using stable for now, but will most likely move to unstable, and add and overlay for anytime I need to use stable.
+    # Moved to unstable, and add and overlay for anytime I need to use stable.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Declaritive disk partitioning tool. Really useful when partitioning new machines.
@@ -25,17 +25,14 @@
 
     # Apples system font
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
-    apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
 
     # A collection of NixOS modules covering hardware quirks
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
-    self,
     nixpkgs,
     disko,
-    home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux"; # Only using one system architecture, so no need for any system functions now :p
