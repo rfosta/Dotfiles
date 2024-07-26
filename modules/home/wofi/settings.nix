@@ -16,5 +16,7 @@
       prompt = "";
       columns = 2;
     };
+
+		style = builtins.readFile ./style.css;
   };
 }
