@@ -1,0 +1,116 @@
+@define-color base #191724;
+@define-color surface #1f1d2e;
+@define-color overlay #26233a;
+
+@define-color muted #6e6a86;
+@define-color subtle #908caa;
+@define-color text #e0def4;
+
+@define-color love #eb6f92;
+@define-color gold #f6c177;
+@define-color rose #ebbcba;
+@define-color pine #31748f;
+@define-color foam #9ccfd8;
+@define-color iris #c4a7e7;
+
+@define-color highlightLow #21202e;
+@define-color highlightMed #403d52;
+@define-color highlightHigh #524f67;
+
+* {
+  border: none;
+  border-radius: 10px;
+  font-family: monospace;
+  font-family: JetBrains Mono Nerd Font;
+  font-weight: Bold;
+  font-size: 12px;
+  min-height: 0;
+  padding: 2px;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text;
+}
+
+tooltip {
+  background: #1e1e2e;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: @pine;
+}
+
+#workspaces button {
+  padding: 5px;
+  color: @highlightMed;
+  /* color: #313244; */
+  margin-right: 5px;
+}
+
+#workspaces button.active {
+  color: @text;
+  /* color: #c6d0f5; */
+}
+
+#workspaces button.focused {
+  color: @subtle;
+  background: @love;
+  border-radius: 10px;
+}
+
+#workspaces button.urgent {
+  color: #11111b;
+  background: #a6e3a1;
+  border-radius: 10px;
+}
+
+#workspaces button:hover {
+  background: @highlightLow;
+  color: @text;
+  border-radius: 0;
+  border: 0;
+  outline: 0;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#tray {
+  background: @base;
+  padding: 0px 10px;
+  margin: 3px 0px;
+}
+
+#tray {
+  border-radius: 10px;
+  margin-right: 4px;
+}
+
+#workspaces {
+  border-radius: 10px;
+  padding-right: 0px;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+#clock {
+  color: @gold;
+  border-radius: 10px;
+}
+
+#network {
+  color: @love;
+  border-radius: 10px;
+  padding-right: 12px;
+}
+
+#pulseaudio {
+  color: @iris;
+}
+
+#battery {
+  color: @foam;
+}

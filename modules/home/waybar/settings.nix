@@ -1,5 +1,4 @@
-{ pkgs, ...}:
-{
+{...}: {
   programs.waybar = {
     enable = true;
 
@@ -8,7 +7,7 @@
         position = "top";
         layer = "top";
         spacing = 4;
-        
+
         modules-center = [];
         modules-right = [
           "pulseaudio"
@@ -63,10 +62,10 @@
           };
           format = "{capacity}% {icon} ";
           format-full = "{capacity}% {icon} ";
-          format-charging =  "{capacity}%   ";
+          format-charging = "{capacity}%   ";
           format-plugged = "{capacity}%  ";
           format-alt = "{time} {icon}";
-          format-icons =  ["" "" "" "" ""];
+          format-icons = ["" "" "" "" ""];
         };
         "network" = {
           # "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -75,28 +74,27 @@
           tooltip-format = "{essid} ({signalStrength}%) ";
           format-linked = "{ifname} (No IP)  ";
           format-disconnected = "Disconnected ⚠";
-          format-alt = "({signalStrength}%)"; 
+          format-alt = "({signalStrength}%)";
         };
         "pulseaudio" = {
           # "scroll-step": 1, // %, can be a float
           format = "{volume}% {icon} ";
           format-bluetooth = "{volume}% {icon} {format_source}";
           format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " ";
+          format-muted = " ";
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
-              headphone = "";
-              hands-free = "";
-              headset = "";
-              phone = "";
-              portable = "";
-              car = "";
-              default = ["" "" ""];
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = ["" "" ""];
           };
           on-click = "pulsemixer --toggle-mute";
-        };        
-        
+        };
       };
     };
   };
