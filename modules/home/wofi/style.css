@@ -20,40 +20,40 @@
 
 
 * {
-  font-family: 'Inconsolata Nerd Font', monospace;
+  font-family: 'SFProDisplay Nerd Font', monospace;
   font-size: 14px;
 }
 
 window {
     margin: 0px;
-    background-color: #191724;
+    background-color: @base;
     border-radius: 0px;
-    border: 2px solid #eb6f92;
-    color: #e0def4;
+    border: 2px solid @foam;
+    color: @text;
 }
 
 #input {
     margin: 5px;
     border-radius: 0px;
     border: none;
-    border-radius: 0px;;
-    color: #eb6f92;
-    background-color: #26233a;
+    border-radius: 0px;
+    color: @love;
+    background-color: @overlay;
     
 }
 
 #inner-box {
     margin: 5px;
     border: none;
-    background-color: #26233a;
-    color: #191724;
+    background-color: @surface;
+    color: @text;
     border-radius: 0px;
 }
 
 #outer-box {
     margin: 15px;
     border: none;
-    background-color: #191724;
+    background-color: @base;
 }
 
 #scroll {
@@ -64,19 +64,19 @@ window {
 #text {
     margin: 5px;
     border: none;
-    color: #e0def4;
+    color: @text;
 } 
 
 #entry:selected {
-    background-color: #eb6f92;
-    color: #191724;
-    border-radius: 0px;;
+    background-color: @iris;
+    color: @base;
+    border-radius: 5px;;
     outline: none;
 }
 
 #entry:selected * {
-    background-color: #eb6f92;
-    color: #191724;
-    border-radius: 0px;;
+    background-color: @iris;
+    color: @base;
+    border-radius: 5px;;
     outline: none;
 }
