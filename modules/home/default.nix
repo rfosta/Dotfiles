@@ -13,7 +13,6 @@
     ./firefox.nix
     ./waybar
     ./wofi
-    ./wayland
 
     # Misc
     ./packages.nix

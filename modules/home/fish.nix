@@ -1,16 +1,16 @@
 {pkgs, ...}:
 let
-  # Down Catppuccin theme from source (Github)...
-  catppuccin-fish = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
+  # Pull down Rose Pine theme from source (Github)...
+  rose-pine-fish = pkgs.fetchFromGitHub {
+    owner = "rose-pine";
     repo = "fish";
-    rev = "0ce27b518e8ead555dec34dd8be3df5bd75cff8e";
-    hash = "sha256-Dc/zdxfzAUM5NX8PxzfljRbYvO9f9syuLO8yBr+R3qg=";
+    rev = "38aab5baabefea1bc7e560ba3fbdb53cb91a6186";
+    hash = "sha256-bSGGksL/jBNqVV0cHZ8eJ03/8j3HfD9HXpDa8G/Cmi8=";
   };
 in
 {
   # Then symlink that to the correct location for fish to pick it up. Not sure if this is the best way to do this, but it works.
-  xdg.configFile."fish/themes/Catppuccin Mocha.theme".source = "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
+  xdg.configFile."fish/themes/Rosé Pine.theme".source = "${rose-pine-fish}/themes/Rosé Pine.theme";
 
   programs.fish = {
     enable = true;
@@ -18,7 +18,7 @@ in
     interactiveShellInit = ''
       set -U fish_greeting # Removes fish default greeting
 
-      fish_config theme choose "Catppuccin Mocha" # Sets that theme to Catppuccin (Mocha)
+      fish_config theme choose "Rosé Pine" # Sets that theme to Rose Pine
 
       # Use fish when using 'nix shell' because bash is old and miserable
       ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
