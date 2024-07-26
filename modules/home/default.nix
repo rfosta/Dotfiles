@@ -11,6 +11,7 @@
 
     # Desktop
     ./firefox.nix
+    ./rofi.nix
     ./waybar
     ./wofi
 
@@ -22,12 +23,12 @@
     ./fish.nix
   ];
 
-	  services.hyprpaper = {
-    	enable = true;
-   		settings = {
-      	splash = false;
-      	preload = [ "~/Pictures/Wallpapers/wall.jpg" ];
-      	wallpaper = [ "eDP-1,~/Pictures/Wallpapers/wall.jpg" ];
-    	};
-		};
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      preload = ["~/Pictures/Wallpapers/wall.jpg"];
+      wallpaper = ["eDP-1,~/Pictures/Wallpapers/wall.jpg"];
+    };
+  };
 }
