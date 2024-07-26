@@ -21,4 +21,13 @@
     ./kitty.nix
     ./fish.nix
   ];
+
+	  services.hyprpaper = {
+    	enable = true;
+   		settings = {
+      	splash = false;
+      	preload = [ "~/Pictures/Wallpapers/wall.jpg" ];
+      	wallpaper = [ "eDP-1,~/Pictures/Wallpapers/wall.jpg" ];
+    	};
+		};
 }

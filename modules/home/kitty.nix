@@ -5,7 +5,7 @@
     enable = true;
     shellIntegration.enableFishIntegration = true;
 
-    theme = "Catppuccin-Mocha";
+    theme = "Rosé Pine";
 
     font = {
       name = "JetBrainsMono Nerd Font"; # Ligatures ftw!
