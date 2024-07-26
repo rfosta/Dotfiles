@@ -11,12 +11,12 @@
 
     # Desktop
     ./firefox.nix
-    ./rofi.nix
     ./waybar
     ./wofi
 
     # Misc
     ./packages.nix
+		./nixcord.nix
 
     # Shell
     ./kitty.nix
